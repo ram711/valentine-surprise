@@ -70,6 +70,10 @@ img.photo {width:150px; border-radius:15px; margin:10px; position:absolute; tran
 <audio id="clickSound" src="click.mp3"></audio>
 
 <script>
+// Fade helpers
+function fadeOutStep(elem,callback){elem.style.transition='opacity 0.7s'; elem.style.opacity=0; setTimeout(()=>{elem.style.display='none'; if(callback) callback();},700);}
+function fadeInStep(elem){elem.style.opacity=1;}
+
 // Step 1
 const step1=document.getElementById('step1');
 const step2=document.getElementById('step2');
@@ -82,9 +86,6 @@ const valNo=document.getElementById('valNo');
 step1.style.opacity=1;
 setTimeout(()=>{fadeOutStep(step1,()=>showStep2());},10000);
 step1.addEventListener('click',()=>{fadeOutStep(step1,()=>showStep2());});
-
-function fadeOutStep(elem,callback){elem.style.transition='opacity 1s'; elem.style.opacity=0; setTimeout(callback,1000);}
-function fadeInStep(elem){elem.style.opacity=1;}
 
 // Step 2
 function showStep2(){
@@ -127,7 +128,7 @@ function createBalloons(){
     b.style.left=left+'vw';
     balloonsContainer.appendChild(b);
 
-    // random drift
+    // Random drift
     let speed = 2000 + Math.random()*3000;
     function drift(){
       if(!b.parentNode) return;
@@ -138,14 +139,13 @@ function createBalloons(){
       b.style.transition=`top ${speed}ms linear, left ${speed}ms linear`;
       b.style.top=newTop+'vh';
       b.style.left=newLeft+'vw';
-      top=newTop;
-      left=newLeft;
+      top=newTop; left=newLeft;
       speed = 2000 + Math.random()*3000;
       setTimeout(drift,speed);
     }
     drift();
 
-    // realistic pop
+    // Balloon pop
     b.addEventListener('click',()=>{
       popSound.play();
       b.style.transition = 'transform 0.3s ease-out, opacity 0.3s';
@@ -175,7 +175,7 @@ function showPhotoAtBalloon(balloon,imgSrc){
   },5000);
 }
 
-// Step 5: Ready buttons
+// Step 5
 const readyText=document.getElementById('readyText');
 const readyButtons=document.getElementById('readyButtons');
 const readyYes=document.getElementById('readyYes');
@@ -239,6 +239,8 @@ function createHeart(){
   setTimeout(()=>heart.remove(),8000);
 }
 setInterval(()=>{for(let i=0;i<3;i++) createHeart();},2000);
+
 </script>
 </body>
 </html>
+
