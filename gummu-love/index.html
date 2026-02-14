@@ -171,7 +171,7 @@ function showPhotoAtBalloon(balloon,imgSrc){
   img.style.display='block';
   setTimeout(()=>{
     img.style.opacity='0';
-    setTimeout(()=>{photosContainer.removeChild(img);},500);
+    setTimeout(()=>{photosContainer.removeChild(img);},5000);
   },5000);
 }
 
@@ -243,4 +243,3 @@ setInterval(()=>{for(let i=0;i<3;i++) createHeart();},2000);
 </script>
 </body>
 </html>
-
